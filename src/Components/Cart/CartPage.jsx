@@ -18,12 +18,13 @@ const CartPage = () => {
       console.log(err.message)
     })
   }, [])
+  
   return (
-    <div className='container my-3' style={{height: "80vh", overflow:"scroll"}}>
+    <div className='container my-3 py-3' style={{height: "80vh"}}>
       <h5 className="mb-4">Shopping Cart</h5>  
       <div className="row">
         <div className="col-md-8">
-          {cartitems.map(item => <CartItem key={item.id} item={item}/>)}
+          <CartItem/>
           
           </div>
           <CartSummary/>

@@ -40,6 +40,7 @@ const ProductPage = ({setNumberCartItems}) => {
     .then(res => {
       console.log(res.data)
       setInCart(true)
+      setNumberCartItems(curr => curr + 1)
     })
 
     .catch(err => {

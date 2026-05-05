@@ -1,9 +1,8 @@
-
-import React from 'react'
+import { Link } from "react-router-dom"
 
 const NotFoundPage = () => {
   return (
-    <header className="py-3 my-5" style={{backgrounColor: "#6050DC"}}>
+    <header className="py-3 my-5" style={{backgroundColor: "#6050DC"}}>
       <div className="contianer px-4 px-lg-5 my-5">
       <div className="text-center text-white">
         <h1 className="display-4 fw-bold">Page Not Found</h1>

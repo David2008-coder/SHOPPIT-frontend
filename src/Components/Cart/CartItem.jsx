@@ -1,6 +1,22 @@
-import React from 'react'
+import { useState } from 'react'
+import api, { BASE_URL } from '../../api'
 
-const CartItem = () => {
+const CartItem = ({item}) => {
+
+  const [quantity, setQuantity] = useState(item.quantity)
+
+  const itemData = {quantity: quantity, item_id:item.id}
+
+  function updateCartItem() {
+    api.patch('update_quantity/', itemData)
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+  }
+
   return (
 <div className="col-md-12">
   {/* Cart Items */}
@@ -9,22 +25,27 @@ const CartItem = () => {
     style={{ backgroundColor: '#f8f9fa', borderRadius: '8px' }}
   >
     <img 
-      src="https://via.placeholder.com/100"
+      src={`${BASE_URL}${item.product.image}`}
       alt="Product Image"
       className="img-fluid"
       style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '5px' }}
     />
     <div className="ms-3 flex-grow-1">
-      <h5 className="mb-1">Product Name</h5>
-      <p className="mb-0 text-muted">$20.00</p>
+      <h5 className="mb-1">{item.product.name}</h5>
+      <p className="mb-0 text-muted">${item.product.price}</p>
     </div>
     <div className="d-flex align-items-center">
       <input 
         type="number"
         className="form-control me-3"
-        defaultValue="1"
+        Value={quantity}
+        min="1"
+        onChange={(e) => setQuantity(e.target.value)}
         style={{ width: '70px' }}
       />
+      <button className="btn btn-sm mx-2"
+      onClick={updateCartItem}
+      style={{backgroundColor:"#4b3bcb", color:"white"}}>Update</button>
       <button className="btn btn-danger btn-sm">Remove</button>
     </div>
   </div>

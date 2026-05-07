@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import api, { BASE_URL } from '../../api'
 
-const CartItem = ({item}) => {
+const CartItem = ({item, setCartTotal, cartitems}) => {
 
   const [quantity, setQuantity] = useState(item.quantity)
 
@@ -11,6 +11,9 @@ const CartItem = ({item}) => {
     api.patch('update_quantity/', itemData)
     .then(res => {
       console.log(res.data)
+      setCartTotal(cartitems.map((cartitems) => cartitems.id === item.id ? res.data.data : cartitems)
+    .reduce((acc, curr) => acc + curr.total, 0))
+      
     })
     .catch(err => {
       console.log(err.message)

@@ -2,32 +2,26 @@ import { useEffect, useState } from 'react'
 import CartSummary from './CartSummary'
 import CartItem from './CartItem'
 import api from "../../api"
+import {Spinner} from '../ui/Spinner'
+import useCartData from '../../hooks/useCartData'
+
 
 const CartPage = ({setNumberCartItems}) => {
 
-  const cart_code = localStorage.getItem("cart_code")
-  const [cartitems, setCartItems] = useState([])
-  const [cartTotal, setCartTotal ] = useState(0.00)
-  const tax = 4.00
+  const {cartitems, setCartItems, cartTotal, setCartTotal, loading, tax} = useCartData()
+  // if(loading) {
+  //   return <Spinner Loading={loading} />
+  // }
 
-  useEffect(function() {
-    api.get(`get_cart?cart_code=${cart_code}`)
-    .then(res => {
-      console.log(res.data)
-      setCartItems(res.data.items)
-      setCartTotal(res.data.sum_total)
-    })
-    
-    .catch(err => {
-      console.log(err.message)
-    })
-  }, [])
+  // if(cartitems.length < 1) {
+  //   return( <div className='alert alert-primary my-5' role="alert">
+  //     you havent added any item to your cart
+  //   </div>
+  //   )
+  // }
 
-  if(cartitems.length < 1) {
-    return( <div className='alert alert-primary my-5' role="alert">
-      you havent added any item to your cart
-    </div>)
-  }
+  // if (loading) return <Spinner/>
+  // if(!loading && cartitems.length < 1) return <div>you havent added any item to your cart</div>
   
   return (
     <div className='container my-3 py-3' style={{height: "80vh", overflow:"scroll"}}>
@@ -37,6 +31,7 @@ const CartPage = ({setNumberCartItems}) => {
           {cartitems.map(item => <CartItem key={item.id} item={item}
            cartitems={cartitems}
             setCartTotal={setCartTotal}
+            setCartItems={setCartItems}
             setNumberCartItems={setNumberCartItems} 
             />)}
           

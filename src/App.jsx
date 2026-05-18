@@ -8,6 +8,7 @@ import ProductPage from './Components/Product/ProductPage'
 import {useEffect } from "react";
 import api from "./api"
 import CartPage from './Components/Cart/CartPage'
+import CheckoutPage from './Components/Checkout/CheckoutPage'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
       <Route index element={<HomePage />}/>
       <Route path="products/:slug"  element={<ProductPage setNumberCartItems={setNumberCartItems} />}/>
       <Route path="cart" element={<CartPage setNumberCartItems={setNumberCartItems} />} />
+      <Route path="checkout" element={<CheckoutPage/>}/>
       <Route path="*" element={<NotFoundPage />}/>
       </Route>
     </Routes>

@@ -4,6 +4,8 @@ import ProductPagePlaceHolder from "./ProductPagePlaceHolder"
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../../api"
 import api from "../../api"
+import { toast } from 'react-toastify';
+
 
 const ProductPage = ({setNumberCartItems}) => {
 
@@ -40,6 +42,7 @@ const ProductPage = ({setNumberCartItems}) => {
     .then(res => {
       console.log(res.data)
       setInCart(true)
+      toast.success("Product added to Cart")
       setNumberCartItems(curr => curr + 1)
     })
 

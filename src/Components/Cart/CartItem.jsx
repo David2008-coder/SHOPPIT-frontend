@@ -1,12 +1,38 @@
 import { useState } from 'react'
 import api, { BASE_URL } from '../../api'
+import { toast } from 'react-toastify';
 
-const CartItem = ({item, setCartTotal, cartitems, setNumberCartItems}) => {
+
+const CartItem = ({item, setCartTotal, setCartItems, cartitems, setNumberCartItems}) => {
 
   const [quantity, setQuantity] = useState(item.quantity)
   const [loading, setLoading] = useState(false)
 
   const itemData = {quantity: quantity, item_id:item.id}
+  const itemID = {item_id: item.id}
+
+  function deleteCartitem() {
+    const confirmDelete = window.confirm("Are you sure you want to delete this cartitem")
+    console.log(itemID)
+
+
+    if(confirmDelete) {
+      api.post("delete_cartitem/", itemID)
+      .then(res => {
+        console.log(res.data)
+        setCartItems(cartitems.filter(cartitem => cartitem.id != item.id))
+        setCartTotal(cartitems.map((cartitems) => cartitems.id === item.id ? res.data.data : cartitems)
+        .reduce((acc, curr) => acc + curr.total, 0))
+          
+          setNumberCartItems(cartitems.map((cartitem) => cartitem.id === item.id ? res.data.data : cartitem)
+        .reduce((acc, curr) => acc + curr.quantity, 0))
+      })
+
+      .catch(err => {
+        console.log(err.message)
+      })
+    }
+  }
 
   function updateCartItem() {
   setLoading(true)
@@ -14,11 +40,8 @@ const CartItem = ({item, setCartTotal, cartitems, setNumberCartItems}) => {
     .then(res => {
       console.log(res.data)
       setLoading(false)
-      setCartTotal(cartitems.map((cartitems) => cartitems.id === item.id ? res.data.data : cartitems)
-    .reduce((acc, curr) => acc + curr.total, 0))
-      
-      setNumberCartItems(cartitems.map((cartitem) => cartitem.id === item.id ? res.data.data : cartitem)
-    .reduce((acc, curr) => acc + curr.quantity, 0))
+      toast.success("CartItem updated successfully!")
+
 
     })
     .catch(err => {
@@ -60,7 +83,7 @@ const CartItem = ({item, setCartTotal, cartitems, setNumberCartItems}) => {
       style={{backgroundColor:"#4b3bcb", color:"white"}} disabled={loading}>
         {loading ? "updating" : "updated"}
       </button>
-      <button className="btn btn-danger btn-sm">Remove</button>
+      <button className="btn btn-danger btn-sm" onClick={deleteCartitem}>Remove</button>
     </div>
   </div>
 

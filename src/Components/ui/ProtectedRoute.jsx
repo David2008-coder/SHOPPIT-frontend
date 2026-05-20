@@ -3,11 +3,12 @@ import api from '../../api';
 import { jwtDecode } from "jwt-decode";
 // import Spinner from "../ui/Spinner.jsx";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const ProtectedRoute = ({children}) => {
 
   const [isAuthorised, setIsAuthorised] = useState(null)
+  const location  = useLocation()
 
   useEffect(function(){
     auth().catch(() => setIsAuthorised(false))
@@ -63,7 +64,7 @@ const ProtectedRoute = ({children}) => {
 
   return (
     <div>
-      isAuthorised ? <children /> : <Navigate to="/login" />
+      isAuthorised ? <children /> : <Navigate to="/login" state={{from: location}} replace />
     </div>
   )
 }

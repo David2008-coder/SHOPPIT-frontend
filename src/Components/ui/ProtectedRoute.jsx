@@ -3,9 +3,9 @@ import api from '../../api';
 import { jwtDecode } from "jwt-decode";
 // import Spinner from "../ui/Spinner.jsx";
 import { useState, useEffect } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate,  useLocation } from "react-router-dom";
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({ children }) => {
 
   const [isAuthorised, setIsAuthorised] = useState(null)
   const location  = useLocation()

@@ -5,7 +5,7 @@ import MainLayout from './layout/MainLayout'
 import HomePage from "./Components/home/HomePage"
 import NotFoundPage from "./Components/ui/NotFoundPage"
 import ProductPage from './Components/Product/ProductPage'
-import {useEffect } from "react";
+import { useEffect } from "react";
 import api from "./api"
 import CartPage from './Components/Cart/CartPage'
 import CheckoutPage from './Components/Checkout/CheckoutPage'

@@ -57,15 +57,13 @@ const ProtectedRoute = ({ children }) => {
     
   }
 
-  // if (isAuthorised === null) {
-  //     return <Spinner />
-  // }
+  if (isAuthorised === null) {
+      return <div>Loading....</div>
+  }
   
 
   return (
-    <div>
-      isAuthorised ? <children /> : <Navigate to="/login" state={{from: location}} replace />
-    </div>
+      isAuthorised ? children  : <Navigate to="/login" state={{from: location}} replace />   
   )
 }
 

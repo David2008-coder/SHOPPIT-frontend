@@ -1,27 +1,61 @@
 import React from 'react'
-import {Link} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const NavBarLink = () => {
   return (
     <ul className="navbar-nav ms-auto m-2 mb-lg-0">
       <li className="nav-item">
-        <a className="nav-link active fw-semibold" href="#!">Home</a>
+        <NavLink
+        to="/login"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Login
+        </NavLink>
       </li>
       
-      <li className="nav-item">
-        <Link to="/profile" className="nav-link fw-semibold" href="#!">Shop</Link>
-      </li>
       
       <li className="nav-item">
-        <a className="nav-link fw-semibold" href="#!">About</a>
+        <NavLink
+        to="/register"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Register
+        </NavLink>
+      </li>
+      
+      
+      <li className="nav-item">
+        <NavLink
+        to="/profile"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Hi, David
+        </NavLink>
+      </li>
+      
+      
+      <li className="nav-item">
+        <NavLink
+        to="/logout"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Logout
+        </NavLink>
+      </li>
+      
 
-      </li>
-      
-      <li className="nav-item">
-        <a className="nav-link fw-semibold" href="#!">Contact</a>
-
-      </li>
-      
     </ul>
   )
 }

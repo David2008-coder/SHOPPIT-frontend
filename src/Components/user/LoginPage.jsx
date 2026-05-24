@@ -6,8 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
 
       const [username, setUsername] = useState("")
       const [password, setPassword] = useState("")
@@ -18,19 +18,26 @@ const LoginPage = () => {
 
       function handleSubmit(e) {
         e.preventDefault()
+        setLoading(true)
         setError(true)
 
         api.post("token/", userInfo)
         .then(res => {
           console.log(res.data)
           localStorage.setItem("access", res.data.access)
+
           localStorage.setItem("refresh", res.data.refresh)
+          // window.location.href = '/checkout'
+          // setTimeout(() => {
+          //   navigate('/checkout')
+          // }, 50);
+          
           setUsername("")
           setPassword("")
           setLoading(false)
           setError("")
 
-          const from = location.state?.from.pathname || "/";
+          const from = location.state.from?.pathname || "/";
           navigate(from, {replace:true});
         })
 
@@ -43,7 +50,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-container my-5">
-      <div   className="login-card shadow">
+      <div className="login-card shadow">
         {error && <Error error={error}/>}
         <h2 className="login-title">Welcome Back</h2>
         <p className="login-subtitle">Please login to your account</p>
@@ -72,7 +79,7 @@ const LoginPage = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-100"  disabled={loading}>Login</button>
+          <button type="submit" className="btn btn-primary w-100" disabled={loading}>Login</button>
         </form>
 
         <div className="login-footer">

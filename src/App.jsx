@@ -11,6 +11,8 @@ import CartPage from './Components/Cart/CartPage'
 import CheckoutPage from './Components/Checkout/CheckoutPage'
 import ProtectedRoute from "./Components/ui/ProtectedRoute"
 import LoginPage from "./Components/user/LoginPage"
+import { AuthProvider } from "./context/AuthContext.jsx"
+
 
 function App() {
 
@@ -32,6 +34,7 @@ function App() {
   }, [])
 
   return (
+    <AuthProvider>
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<MainLayout numCartItems={numCartItems} />}>
@@ -47,6 +50,7 @@ function App() {
       </Route>
     </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 } 
 

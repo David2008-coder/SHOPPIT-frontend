@@ -1,35 +1,18 @@
-import React from 'react'
-import { NavLink } from "react-router-dom"
+import { useContext } from 'react';
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext"
 
 const NavBarLink = () => {
+
+  const { isAuthenticated } = useContext(AuthContext);
+
+
   return (
     <ul className="navbar-nav ms-auto m-2 mb-lg-0">
-      <li className="nav-item">
-        <NavLink
-        to="/login"
-        className={({ isActive }) =>
-          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
-      }
-      end
-      >
-        Login
-        </NavLink>
-      </li>
-      
-      
-      <li className="nav-item">
-        <NavLink
-        to="/register"
-        className={({ isActive }) =>
-          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
-      }
-      end
-      >
-        Register
-        </NavLink>
-      </li>
-      
-      
+      {isAuthenticated ? 
+
+<>
+              
       <li className="nav-item">
         <NavLink
         to="/profile"
@@ -55,6 +38,41 @@ const NavBarLink = () => {
         </NavLink>
       </li>
       
+      </>
+
+:
+
+<>
+      <li className="nav-item">
+        <NavLink
+        to="/login"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Login
+        </NavLink>
+      </li>
+      
+      
+      <li className="nav-item">
+        <NavLink
+        to="/register"
+        className={({ isActive }) =>
+          isActive ? "nav-link active fw-semibold": "nav-link fw-semibold" 
+      }
+      end
+      >
+        Register
+        </NavLink>
+      </li>
+</>
+}
+      
+      
+
+
 
     </ul>
   )

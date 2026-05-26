@@ -1,10 +1,13 @@
 import "./LoginPage.css";
-import { useState } from "react"
+import { useContext, useState } from "react"
 import api from '../../api'
 import Error from '../ui/Error'
 import { useLocation, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
 
 const LoginPage = () => {
+
+  const { setIsAuthenticated, get_username } = useContext(AuthContext)
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -19,7 +22,7 @@ const LoginPage = () => {
       function handleSubmit(e) {
         e.preventDefault()
         setLoading(true)
-        setError(true)
+        // setError(true)
 
         api.post("token/", userInfo)
         .then(res => {
@@ -35,9 +38,11 @@ const LoginPage = () => {
           setUsername("")
           setPassword("")
           setLoading(false)
+          setIsAuthenticated(true)
+          get_username()
           setError("")
 
-          const from = location.state.from?.pathname || "/";
+          const from = location?.state?.from.pathname || "/";
           navigate(from, {replace:true});
         })
 

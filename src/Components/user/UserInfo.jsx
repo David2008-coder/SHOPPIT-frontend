@@ -2,7 +2,7 @@ import styles from "./UserInfo.module.css"
 import pic from "../../assets/man.png"
 
 
-const UserInfo = () =>  {
+const UserInfo = ({userInfo}) =>  {
   return (
     <div className="row mb-4">
       <div className={`col-md-3 py-3 card ${styles.textCenter}`}>
@@ -12,7 +12,7 @@ const UserInfo = () =>  {
           className={`img-fluid rounded-circle mb-3 mx-auto ${styles.profileImage}`}
         />
         <h4>John Doe</h4>
-        <p className="text-muted">John.doe@example.com</p>
+        <p className="text-muted">{userInfo.email}</p>
         <button className="btn mt-2" style={{ backgroundColor: '#6050DC', color: 'white'}}>Edit Profile</button>
       </div>
       <div className="col-md-9">
@@ -24,25 +24,29 @@ const UserInfo = () =>  {
         <div className="card-body">
           <div className="row">
             <div className="col-md-6">
+              
               <p>
-                <strong>Full Name:</strong>JohnDoe
+                <strong>Full Name:</strong>{`${userInfo.first_name} ${userInfo.last_name}`}
               </p>
               <p>
-                <strong>Email:</strong>john.doe@example.com
+                <strong>Email:</strong>{userInfo.email}
               </p>
               <p>
-                <strong>Phone:</strong> +123 456 7890
+                <strong>Phone:</strong> {userInfo.phone}
               </p>
               </div>
               <div className="col-md-6">
                 <p>
-                  <strong>City:</strong> New York
+                <strong>Username:</strong>{userInfo.username}
+              </p>
+                <p>
+                  <strong>City:</strong> {userInfo.city}
                 </p>
                 <p>
-                  <strong>Country: </strong> USA
+                  <strong>Country: </strong> {userInfo.state}
                 </p>
                 <p>
-                  <strong>Member Since:</strong> January 2025
+                  {/* <strong>Member Since:</strong> {userInfo.username} */}
                 </p>
 
               </div>

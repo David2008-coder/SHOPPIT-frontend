@@ -12,6 +12,7 @@ import CheckoutPage from './Components/Checkout/CheckoutPage'
 import ProtectedRoute from "./Components/ui/ProtectedRoute"
 import LoginPage from "./Components/user/LoginPage"
 import UserProfilePage from "./Components/user/UserProfilePage"
+import PaymentStatusPage from "./Components/Payment/PaymentStatusPage"
 import { AuthProvider } from "./context/AuthContext.jsx"
 
 
@@ -49,6 +50,7 @@ function App() {
       <Route path="login" element={<LoginPage />}/>
       <Route path="profile" element={<UserProfilePage/>}/>
       <Route path="*" element={<NotFoundPage />}/>
+      <Route path="payment-status" element={<PaymentStatusPage/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

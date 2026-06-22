@@ -1,7 +1,7 @@
 import OrderHisotryItem from "./OrderHisotryItem"
 
 
-const OrderHistoryItemContainer = () => {
+const OrderHistoryItemContainer = ({orderitems}) => {
   return (
     <div className="row" style={{height: "300px", overflow: "auto"}}>
       <div className="col-nd-12">
@@ -10,12 +10,8 @@ const OrderHistoryItemContainer = () => {
             <h5>Order History</h5>
           </div>
 
-          <OrderHisotryItem/>
-          <OrderHisotryItem/>
-          <OrderHisotryItem/>
-          <OrderHisotryItem/>
+          {orderitems.map(item => <OrderHistoryItem key={item.id} item={item} />)}
 
-          <OrderHisotryItem/>
         </div>
       </div>
     </div>

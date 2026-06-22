@@ -5,6 +5,7 @@ import api from "../../api"
 
 const UserProfilePage = () => {
   const [userInfo, setUserInfo] = useState({})
+  const [orderitems, setOrderItems] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(function() {
@@ -13,6 +14,7 @@ const UserProfilePage = () => {
     .then(res => {
       console.log(res.data)
       setUserInfo(res.data)
+      setOrderItems(res.data.items)
       setLoading(false)
     })
 
@@ -29,7 +31,7 @@ const UserProfilePage = () => {
       
       <UserInfo userInfo={userInfo}/>
 
-      <OrderHistoryItemContainer/>
+      <OrderHistoryItemContainer orderitems={orderitems}/>
     </div>
   )
 }

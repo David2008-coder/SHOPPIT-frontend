@@ -1,0 +1,15 @@
+#note for navbar.css.module
+
+@media (max-width: 1000px) {
+  .responsiveCart {
+    margin-top: 20px;
+  }
+}
+
+.stickyNavbar {
+  position: sticky !important;
+  top: 0;
+  z-index: 1030;/*ensure t stays above the other elements */
+}
+
+

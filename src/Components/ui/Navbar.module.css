@@ -1,11 +1,41 @@
-@media (max-width: 1000px) {
-  .responsiveCart {
-    margin-top: 20px;
-  }
-}
-
 .stickyNavbar {
   position: sticky !important;
   top: 0;
-  z-index: 1030;/*ensure t stays above the other elements */
+  z-index: 1030;
+  transition: all 0.3s ease;
+}
+
+.cartBtn {
+  background-color: #111111;
+  border: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cartBtn:hover {
+  background-color: #6050DC !important;
+  transform: translateY(-1px);
+}
+
+/* Beautiful styling for the expanded mobile drawer */
+@media (max-width: 991.98px) {
+  :global(.navbar-collapse) {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    /* Smooth slide-down & fade-in effect when menu opens */
+    animation: slideDown 0.25s ease-out forwards;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
